@@ -16,7 +16,7 @@ while 1:
     counter += 1
     print(counter)
     if GPIO.input(pin) == GPIO.HIGH:
-        data = counter + " - I heard something!"
+        data = str(counter) + " - I heard something!"
         print("I heard something!")
         camera.capture("image-%s.jpg" % counter)
         try:
