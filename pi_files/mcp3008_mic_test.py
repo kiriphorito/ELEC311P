@@ -37,9 +37,9 @@ while True:
     for x in range(0, samples_per_window):
         mic_voltage = mcp.read_adc(0)
         if (mic_voltage < 1024):
-            if (mic_voltage > mic_voltage_min):
+            if (mic_voltage > mic_voltage_max):
                 mic_voltage_min = mic_voltage
-            elif mic_voltage < mic_voltage_max:
+            elif mic_voltage < mic_voltage_min:
                 mic_voltage_max = mic_voltage
 
     signal_range = mic_voltage_max - mic_voltage_min
