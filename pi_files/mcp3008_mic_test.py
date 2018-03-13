@@ -8,8 +8,8 @@ import time
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
+MCP3008_SAMPLING = 200 # at 5V
 SAMPLE_WINDOW = 50 # in mS
-
 
 # Software SPI configuration:
 CLK  = 18
@@ -30,6 +30,21 @@ print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |
 print('-' * 57)
 # Main program loop.
 while True:
+    mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
+    mic_voltage_max = 0
+
+    samples_per_window = MCP3008_SAMPLING//SAMPLE_WINDOW
+    for x in range(0, samples_per_window):
+        mic_voltage = mcp.read_adc(0)
+        if (mic_voltage < 1024):
+            if (mic_voltage > mic_voltage_min):
+                mic_voltage_min = mic_voltage
+            elif mic_voltage < mic_voltage_max:
+                mic_voltage_max = mic_voltage
+
+    signal_range = mic_voltage_max - mic_voltage_min
+    volts = (signal_range * 5.0) / 1024
+
     # Read all the ADC channel values in a list.
     #values = [0] * 8
     #for i in range(8):
@@ -37,6 +52,5 @@ while True:
         #values[i] = mcp.read_adc(i)
     # Print the ADC values.
     #print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
-    mic_voltage = mcp.read_adc(0)
-    print(mic_voltage)
+    print(volts)
     time.sleep(1/SAMPLE_WINDOW)
