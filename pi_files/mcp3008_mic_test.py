@@ -37,10 +37,11 @@ while True:
     for x in range(0, samples_per_window):
         mic_voltage = mcp.read_adc(0)
         if (mic_voltage < 1024):
-            if (mic_voltage > mic_voltage_max):
+            if mic_voltage > mic_voltage_max:
                 mic_voltage_min = mic_voltage
             elif mic_voltage < mic_voltage_min:
                 mic_voltage_max = mic_voltage
+        print(mic_voltage)
 
     signal_range = mic_voltage_max - mic_voltage_min
     volts = (signal_range * 5.0) / 1024
@@ -52,5 +53,5 @@ while True:
         #values[i] = mcp.read_adc(i)
     # Print the ADC values.
     #print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
-    print(volts)
+    # print(volts)
     time.sleep(1/SAMPLE_WINDOW)
