@@ -41,10 +41,11 @@ while True:
                 mic_voltage_max = mic_voltage
             elif mic_voltage < mic_voltage_min:
                 mic_voltage_min = mic_voltage
-        print(mic_voltage)
+        # print(mic_voltage)
+        time.sleep(1/MCP3008_SAMPLING)
 
     signal_range = mic_voltage_max - mic_voltage_min
-    volts = (signal_range * 5.0) / 1024
+    #volts = (signal_range * 5.0) / 1024
 
     # Read all the ADC channel values in a list.
     #values = [0] * 8
@@ -53,5 +54,5 @@ while True:
         #values[i] = mcp.read_adc(i)
     # Print the ADC values.
     #print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
-    # print(volts)
-    time.sleep(1/SAMPLE_WINDOW)
+    print(signal_range)
+    # time.sleep(1/SAMPLE_WINDOW)
