@@ -60,4 +60,9 @@ while True:
     # Print the ADC values.
     #print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
     print(signal_range)
+
+    range = 10
+    for x in range(0, signal_range//range):
+        print("X", end="", flush=True)
+    print()
     # time.sleep(1/SAMPLE_WINDOW)
