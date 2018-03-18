@@ -61,8 +61,8 @@ while True:
     #print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
     # print(signal_range)
 
-    range = 10
-    steps = signal_range // range
+    steps_range = 10
+    steps = signal_range // steps_range
     for x in range(0, steps):
         print("X", end="", flush=True)
     print()
