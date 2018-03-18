@@ -30,13 +30,18 @@ print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |
 print('-' * 57)
 # Main program loop.
 while True:
-    mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
-    mic_voltage_max = 0
+    # Start from lowest possible value and highest for min and max
+    # mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
+    # mic_voltage_max = 0
+
+    # Start from initial values, i.e. initialise both values to the first value
+    mic_voltage_min = mcp.read_adc(0)
+    mic_voltage_max = mic_voltage_min
 
     samples_per_window = MCP3008_SAMPLING//SAMPLE_WINDOW
     for x in range(0, samples_per_window):
         mic_voltage = mcp.read_adc(0)
-        if (mic_voltage < 1024):
+        if (mic_voltage < 1024 and mic_voltage >= 0): # To filter out wrong vaules
             if mic_voltage > mic_voltage_max:
                 mic_voltage_max = mic_voltage
             elif mic_voltage < mic_voltage_min:
