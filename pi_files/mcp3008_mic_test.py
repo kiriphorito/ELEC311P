@@ -1,8 +1,6 @@
-# Simple example of reading the MCP3008 analog input channels and printing
-# them all out.
-# Author: Tony DiCola
-# License: Public Domain
 import time
+import datetime
+import json
 
 # Import SPI library (for hardware SPI) and MCP3008 library.
 import Adafruit_GPIO.SPI as SPI
@@ -17,6 +15,13 @@ MISO = 23
 MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
+
+device1 = {
+    'id': '1',
+    'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    'mic_reading': randint(50,100),
+    'image': 'test-image1'
+}
 
 # Hardware SPI configuration:
 # SPI_PORT   = 0
@@ -65,7 +70,7 @@ while True:
     max_volume = min_volume
     # print_sound_bars(min_volume)
 
-    for x in range(0, 10):
+    for x in range(0, 100):
         mic_volume = get_voltage_aplitude()
         # print_sound_bars(mic_volume)
         if (mic_volume < 1024 and mic_volume >= 0): # To filter out wrong vaules
@@ -77,7 +82,9 @@ while True:
     volume_range = max_volume - min_volume
     #volts = (signal_range * 5.0) / 1024
 
+    print("Level Difference:", volume_range, end="", flush=True)
     if volume_range > 50:
         print("Unexpected sound")
+        print()
 
     # time.sleep(1/SAMPLE_WINDOW)
