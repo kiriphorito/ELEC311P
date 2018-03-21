@@ -24,12 +24,7 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 # mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 
-print('Reading MCP3008 values, press Ctrl-C to quit...')
-# Print nice channel column headers.
-print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*range(8)))
-print('-' * 57)
-# Main program loop.
-while True:
+def get_voltage_aplitude():
     # Start from lowest possible value and highest for min and max
     # mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
     # mic_voltage_max = 0
@@ -49,7 +44,11 @@ while True:
         # print(mic_voltage)
         time.sleep(1/MCP3008_SAMPLING)
 
-    signal_range = mic_voltage_max - mic_voltage_min
+    return mic_voltage_max - mic_voltage_min
+
+# Main program loop.
+while True:
+    signal_range = get_voltage_aplitude()
     #volts = (signal_range * 5.0) / 1024
 
     # Read all the ADC channel values in a list.
