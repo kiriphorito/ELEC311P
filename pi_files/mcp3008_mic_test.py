@@ -1,6 +1,7 @@
 import time
 import datetime
 import json
+import thread
 
 from random import *
 
@@ -21,7 +22,8 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 device1 = {
     'id': '1',
     'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    'mic_reading': randint(50,100),
+    'mean_reading': randint(50,100),
+    'reading_range': randint(50,100),
     'image': 'test-image1'
 }
 
@@ -91,9 +93,21 @@ while True:
     #volts = (signal_range * 5.0) / 1024
 
     print("Level Difference:", volume_range, end="", flush=True)
-    if distance_from_mean > 20:
+    if distance_from_mean > 75:
         print("    Unexpected sound", volume_range, end="", flush=True)
     print()
+
+    try:
+        thread.start_new_thread(
+            device1['time'] =  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            device1['mean_reading'] = mean_volume
+            try:
+                client=mqtt.Client()
+                client.username_pw_set("qufzpimd","ra44TqXIg1PZ")
+                client.connect("m23.cloudmqtt.com",10952,60)
+                client.publish("ELEC311P-device1",json.dumps(device1))
+                time.sleep(1)
+        )
 
 
     # time.sleep(1/SAMPLE_WINDOW)
