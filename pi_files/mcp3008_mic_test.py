@@ -119,7 +119,6 @@ while True:
         print("    Unexpected sound", volume_range, end="", flush=True)
         image = "Unexpected sound"
         filename = datetime.datetime.now().strftime("%Y-%m-%d %H%M%S") + ".jpg"
-        camera.capture("image.jpg")
     print()
 
     try:
