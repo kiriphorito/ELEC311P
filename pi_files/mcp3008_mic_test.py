@@ -63,11 +63,11 @@ while True:
 
     min_volume = get_voltage_aplitude()
     max_volume = min_volume
-    print_sound_bars(min_volume)
+    # print_sound_bars(min_volume)
 
     for x in range(0, 10):
         mic_volume = get_voltage_aplitude()
-        print_sound_bars(mic_volume)
+        # print_sound_bars(mic_volume)
         if (mic_volume < 1024 and mic_volume >= 0): # To filter out wrong vaules
             if mic_volume > max_volume:
                 max_volume = mic_volume
@@ -77,6 +77,7 @@ while True:
     volume_range = max_volume - min_volume
     #volts = (signal_range * 5.0) / 1024
 
-
+    if volume_range > 50:
+        print("Unexpected sound")
 
     # time.sleep(1/SAMPLE_WINDOW)
