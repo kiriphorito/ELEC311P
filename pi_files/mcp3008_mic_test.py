@@ -42,6 +42,9 @@ def send_mqtt(mean_volume, reading_range):
         client.connect("m23.cloudmqtt.com",10952,60)
         client.publish("ELEC311P-device1",json.dumps(device1))
         time.sleep(1)
+    except KeyboardInterrupt:
+        print("error")
+    client.disconnect()
 
 
 def get_voltage_aplitude():
