@@ -1,7 +1,7 @@
 import time
 import datetime
 import json
-import thread
+import _thread
 
 from random import *
 
@@ -112,7 +112,7 @@ while True:
     print()
 
     try:
-        thread.start_new_thread(send_mqtt, (mean_volume, distance_from_mean))
+        thread.start(send_mqtt, (mean_volume, distance_from_mean))
     except:
         print("Thread error")
         break
