@@ -46,23 +46,37 @@ def get_voltage_aplitude():
 
     return mic_voltage_max - mic_voltage_min
 
-# Main program loop.
-while True:
-    signal_range = get_voltage_aplitude()
-    #volts = (signal_range * 5.0) / 1024
-
-    # Read all the ADC channel values in a list.
-    #values = [0] * 8
-    #for i in range(8):
-        # The read_adc function will get the value of the specified channel (0-7).
-        #values[i] = mcp.read_adc(i)
-    # Print the ADC values.
-    #print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
-    # print(signal_range)
-
+def print_sound_bars(range):
     steps_range = 10
-    steps = signal_range // steps_range
+    steps = range // steps_range
     for x in range(0, steps):
         print("X", end="", flush=True)
     print()
+
+# Main program loop.
+while True:
+    # Start from lowest possible value and highest for min and max
+    # mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
+    # mic_voltage_max = 0
+
+    # Start from initial values, i.e. initialise both values to the first value
+
+    min_volume = get_voltage_aplitude()
+    max_volume = min_volume
+    print_sound_bars()
+
+    for x in range(0, 10):
+        mic_volume = get_voltage_aplitude()
+        print_sound_bars()
+        if (mic_volume < 1024 and mic_volume >= 0): # To filter out wrong vaules
+            if mic_volume > max_volume:
+                max_volume = mic_volume
+            elif mic_volume < min_volume:
+                mic_volume = mic_volume
+
+    volume_range = max_volume - min_volume
+    #volts = (signal_range * 5.0) / 1024
+
+
+
     # time.sleep(1/SAMPLE_WINDOW)
