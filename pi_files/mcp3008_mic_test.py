@@ -87,6 +87,7 @@ while True:
     print("Level Difference:", volume_range, end="", flush=True)
     if volume_range > 50:
         print("Unexpected sound")
-        print()
+    print()
+
 
     # time.sleep(1/SAMPLE_WINDOW)
