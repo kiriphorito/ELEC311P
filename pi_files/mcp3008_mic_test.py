@@ -91,7 +91,7 @@ while True:
     #volts = (signal_range * 5.0) / 1024
 
     print("Level Difference:", volume_range, end="", flush=True)
-    if distance_from_mean > 50:
+    if distance_from_mean > 20:
         print("    Unexpected sound", volume_range, end="", flush=True)
     print()
 
