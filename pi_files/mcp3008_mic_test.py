@@ -107,13 +107,14 @@ while True:
     distance_from_mean = max_volume - mean_volume
     #volts = (signal_range * 5.0) / 1024
 
+    print("Mean:", mean_volume, end="", flush=True)
     print("Level Difference:", volume_range, end="", flush=True)
     if distance_from_mean > 75:
         print("    Unexpected sound", volume_range, end="", flush=True)
     print()
 
     try:
-        _thread.start_new_thread(send_mqtt, (mean_volume, distance_from_mean))
+        _thread.start_new_thread(send_mqtt, (mean_volume, volume_range))
     except:
         print("Thread error")
         break
