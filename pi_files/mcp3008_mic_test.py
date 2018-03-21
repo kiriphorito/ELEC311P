@@ -24,6 +24,25 @@ mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 # SPI_DEVICE = 0
 # mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
+device1 = {
+    'id': '1',
+    'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    'mean_reading': randint(50,100),
+    'reading_range': randint(50,100),
+    'image': 'test-image1'
+}
+
+def send_mqtt(mean_volume, reading_range):
+    device1['time'] =  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    device1['mean_reading'] = mean_volume
+    device1['reading_range'] = reading_range
+    try:
+        client=mqtt.Client()
+        client.username_pw_set("qufzpimd","ra44TqXIg1PZ")
+        client.connect("m23.cloudmqtt.com",10952,60)
+        client.publish("ELEC311P-device1",json.dumps(device1))
+        time.sleep(1)
+
 
 def get_voltage_aplitude():
     # Start from lowest possible value and highest for min and max
@@ -90,23 +109,10 @@ while True:
     print()
 
     try:
-        thread.start_new_thread(
-            device1 = {
-                'id': '1',
-                'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                'mean_reading': randint(50,100),
-                'reading_range': randint(50,100),
-                'image': 'test-image1'
-            }
-            device1['time'] =  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            device1['mean_reading'] = mean_volume
-            try:
-                client=mqtt.Client()
-                client.username_pw_set("qufzpimd","ra44TqXIg1PZ")
-                client.connect("m23.cloudmqtt.com",10952,60)
-                client.publish("ELEC311P-device1",json.dumps(device1))
-                time.sleep(1)
-        )
+        thread.start_new_thread(send_mqtt, (mean_volume, distance_from_mean))
+    except:
+        print("Thread error")
+        break
 
 
     # time.sleep(1/SAMPLE_WINDOW)
