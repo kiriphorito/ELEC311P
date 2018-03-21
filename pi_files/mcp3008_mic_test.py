@@ -2,6 +2,8 @@ import time
 import datetime
 import json
 
+from random import *
+
 # Import SPI library (for hardware SPI) and MCP3008 library.
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
