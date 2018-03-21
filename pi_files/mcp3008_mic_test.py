@@ -112,7 +112,7 @@ while True:
     print()
 
     try:
-        thread.start(send_mqtt, (mean_volume, distance_from_mean))
+        _thread.start(send_mqtt, (mean_volume, distance_from_mean))
     except:
         print("Thread error")
         break
