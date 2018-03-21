@@ -19,14 +19,6 @@ MOSI = 24
 CS   = 25
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 
-device1 = {
-    'id': '1',
-    'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    'mean_reading': randint(50,100),
-    'reading_range': randint(50,100),
-    'image': 'test-image1'
-}
-
 # Hardware SPI configuration:
 # SPI_PORT   = 0
 # SPI_DEVICE = 0
@@ -99,6 +91,13 @@ while True:
 
     try:
         thread.start_new_thread(
+            device1 = {
+                'id': '1',
+                'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                'mean_reading': randint(50,100),
+                'reading_range': randint(50,100),
+                'image': 'test-image1'
+            }
             device1['time'] =  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             device1['mean_reading'] = mean_volume
             try:
