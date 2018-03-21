@@ -70,10 +70,14 @@ while True:
 
     min_volume = get_voltage_aplitude()
     max_volume = min_volume
+    mean_volume = min_volume
     # print_sound_bars(min_volume)
 
-    for x in range(0, 100):
+    step_space = 100
+
+    for x in range(0, step_space):
         mic_volume = get_voltage_aplitude()
+        mean_volume += mic_volume
         # print_sound_bars(mic_volume)
         if (mic_volume < 1024 and mic_volume >= 0): # To filter out wrong vaules
             if mic_volume > max_volume:
@@ -82,11 +86,13 @@ while True:
                 mic_volume = mic_volume
 
     volume_range = max_volume - min_volume
+    mean_volume /= step_space
+    distance_from_mean = mean_volume - (volume_range/2)
     #volts = (signal_range * 5.0) / 1024
 
     print("Level Difference:", volume_range, end="", flush=True)
-    if volume_range > 50:
-        print("Unexpected sound")
+    if distance_from_mean > 50:
+        print("    Unexpected sound", volume_range, end="", flush=True)
     print()
 
 
