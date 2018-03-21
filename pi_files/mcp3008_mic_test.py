@@ -46,9 +46,9 @@ def get_voltage_aplitude():
 
     return mic_voltage_max - mic_voltage_min
 
-def print_sound_bars(range):
+def print_sound_bars(sound_range):
     steps_range = 10
-    steps = range // steps_range
+    steps = sound_range // steps_range
     for x in range(0, steps):
         print("X", end="", flush=True)
     print()
