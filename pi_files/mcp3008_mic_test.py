@@ -33,10 +33,11 @@ device1 = {
     'image': 'test-image1'
 }
 
-def send_mqtt(mean_volume, reading_range):
+def send_mqtt(mean_volume, reading_range, image):
     device1['time'] =  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     device1['mean_reading'] = mean_volume
     device1['reading_range'] = reading_range
+    device1['image'] = image
     try:
         client=mqtt.Client()
         client.username_pw_set("qufzpimd","ra44TqXIg1PZ")
@@ -107,14 +108,17 @@ while True:
     distance_from_mean = max_volume - mean_volume
     #volts = (signal_range * 5.0) / 1024
 
+    image = ""
+
     print("Mean:", mean_volume, end="", flush=True)
     print("Level Difference:", volume_range, end="", flush=True)
     if distance_from_mean > 75:
         print("    Unexpected sound", volume_range, end="", flush=True)
+        image = "Unexpected sound"
     print()
 
     try:
-        _thread.start_new_thread(send_mqtt, (mean_volume, volume_range))
+        _thread.start_new_thread(send_mqtt, (mean_volume, volume_range, image))
     except:
         print("Thread error")
         break
