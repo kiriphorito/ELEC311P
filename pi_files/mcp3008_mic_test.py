@@ -80,9 +80,8 @@ def print_sound_bars(sound_range):
     print()
 
 # Main program loop.
+camera = PiCamera()
 while True:
-    camera = PiCamera()
-
     # Start from lowest possible value and highest for min and max
     # mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
     # mic_voltage_max = 0
