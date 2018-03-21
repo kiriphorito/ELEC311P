@@ -87,7 +87,7 @@ while True:
 
     volume_range = max_volume - min_volume
     mean_volume /= step_space
-    distance_from_mean = mean_volume - (volume_range/2)
+    distance_from_mean = max_volume - mean_volume
     #volts = (signal_range * 5.0) / 1024
 
     print("Level Difference:", volume_range, end="", flush=True)
