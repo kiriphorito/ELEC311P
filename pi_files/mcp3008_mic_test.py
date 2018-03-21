@@ -111,11 +111,7 @@ while True:
         print("    Unexpected sound", volume_range, end="", flush=True)
     print()
 
-    try:
-        _thread.start(send_mqtt, (mean_volume, distance_from_mean))
-    except:
-        print("Thread error")
-        break
+    _thread.start(send_mqtt, (mean_volume, distance_from_mean))
 
 
     # time.sleep(1/SAMPLE_WINDOW)
