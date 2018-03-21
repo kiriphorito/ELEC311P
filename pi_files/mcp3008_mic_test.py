@@ -5,6 +5,7 @@ import json
 import _thread
 
 from random import *
+from picamera import PiCamera
 
 # Import SPI library (for hardware SPI) and MCP3008 library.
 import Adafruit_GPIO.SPI as SPI
@@ -80,6 +81,8 @@ def print_sound_bars(sound_range):
 
 # Main program loop.
 while True:
+    camera = PiCamera()
+
     # Start from lowest possible value and highest for min and max
     # mic_voltage_min = 1024 # MCP3008 is a 10-bit chip
     # mic_voltage_max = 0
@@ -111,10 +114,12 @@ while True:
     image = ""
 
     print("Mean:", mean_volume, end="", flush=True)
-    print("Level Difference:", volume_range, end="", flush=True)
+    print(" Level Difference:", volume_range, end="", flush=True)
     if distance_from_mean > 75:
         print("    Unexpected sound", volume_range, end="", flush=True)
         image = "Unexpected sound"
+        filename = datetime.datetime.now().strftime("%Y-%m-%d %H%M%S") + ".jpg"
+        camera.capture(filename)
     print()
 
     try:
