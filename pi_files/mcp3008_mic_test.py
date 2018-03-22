@@ -45,7 +45,6 @@ def send_mqtt(mean_volume, reading_range, image):
         client.username_pw_set("qufzpimd","ra44TqXIg1PZ")
         client.connect("m23.cloudmqtt.com",10952,60)
         client.publish("ELEC311P-device1",json.dumps(device1))
-        time.sleep(1)
     except KeyboardInterrupt:
         print("error")
     client.disconnect()
