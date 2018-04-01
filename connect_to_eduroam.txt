@@ -1,0 +1,48 @@
+Please find below the instructions for connecting your RPi to Eduroam.
+
+1) Download the file called “eduroam-pi-config” which is attached to this email to your computer. Do NOT change the extension of the file. I repeat....do NOT change the extension of the filename.
+2) Copy the file from your computer to a USB stick.
+3) Insert the USB stick in one of the USB ports available on your RPi.
+4) Open up a terminal on the RPi.
+5) Type the following command into the terminal:
+
+ls -l /dev/disk/by-uuid/
+
+This should list your USB drive which will appear as an SDA device. On my RPi, the USB drive is referred to as “sda1”.
+
+Ensure you make note of both the sda name and the numeric ID (for example, 18A9-9943).
+
+6) Now type the following commands, one-by-one in the following order:
+
+sudo mkdir /media/usb
+sudo chown -R pi:pi /media/usb
+sudo mount /dev/sda1 /media/usb -o uid=pi,gid=pi
+
+For full details of mounting a USB drive on a RPi, please refer to the tutorial below:
+http://www.raspberrypi-spy.co.uk/2014/05/how-to-mount-a-usb-flash-disk-on-the-raspberry-pi/
+
+7) If you did not get any errors, then the USB drive should be mounted. Type in the following command:
+
+cd /media/usb
+
+This will take you to the contents of the USB drive.
+
+8) Now type in the command:
+
+ls
+
+You should see that the file “eduroam-pi-config” is available.
+
+9) Now type in the command:
+
+chmod 700 eduroam-pi-config
+
+followed by the command:
+
+sudo ./eduroam-pi-config
+
+It will ask for your UCL userid. Enter this with the @ucl.ac.uk. Then it will ask for your password to be entered twice. As long as those passwords match it will write the config file to /etc/wpa_supplicant/wpa_supplicant.conf. 
+
+10) Now restart your RPi.
+
+That’s it! You should now have WiFi connectivity on your RPi through Eduroam.
