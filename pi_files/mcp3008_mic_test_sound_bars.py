@@ -45,8 +45,8 @@ def get_voltage_aplitude():
                 mic_voltage_min = mic_voltage
         # print(mic_voltage)
         time.sleep(1/MCP3008_SAMPLING)
-    # print_sound_bars(mic_voltage_max - mic_voltage_min)
-    print(mic_voltage_max - mic_voltage_min)
+    print_sound_bars(mic_voltage_max - mic_voltage_min)
+    # print(mic_voltage_max - mic_voltage_min)
     return mic_voltage_max - mic_voltage_min
 
 def print_sound_bars(sound_range):
