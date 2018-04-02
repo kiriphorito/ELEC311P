@@ -59,7 +59,7 @@ def get_voltage_aplitude():
     mic_voltage_min = mcp.read_adc(0)
     mic_voltage_max = mic_voltage_min
 
-    for x in range(0, MCP3008_SAMPLING):
+    for x in range(0, SAMPLE_WINDOW):
         mic_voltage = mcp.read_adc(0)
         if (mic_voltage < 1024 and mic_voltage >= 0): # To filter out wrong vaules
             if mic_voltage > mic_voltage_max:
@@ -92,7 +92,7 @@ while True:
     mean_volume = min_volume
     # print_sound_bars(min_volume)
 
-    step_space = 100
+    step_space = 75
 
     for x in range(0, step_space):
         mic_volume = get_voltage_aplitude()
