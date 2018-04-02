@@ -11,7 +11,7 @@ from picamera import PiCamera
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
-MCP3008_SAMPLING = 200 # at 5V
+MCP3008_SAMPLING = 200000 # at 5V
 SAMPLE_WINDOW = 50 # in mS
 
 # Software SPI configuration:
@@ -59,8 +59,7 @@ def get_voltage_aplitude():
     mic_voltage_min = mcp.read_adc(0)
     mic_voltage_max = mic_voltage_min
 
-    samples_per_window = MCP3008_SAMPLING//SAMPLE_WINDOW
-    for x in range(0, samples_per_window):
+    for x in range(0, MCP3008_SAMPLING):
         mic_voltage = mcp.read_adc(0)
         if (mic_voltage < 1024 and mic_voltage >= 0): # To filter out wrong vaules
             if mic_voltage > mic_voltage_max:
@@ -114,6 +113,8 @@ while True:
 
     print("Mean:", mean_volume, end="", flush=True)
     print(" Level Difference:", volume_range, end="", flush=True)
+    print(" Max Level:", max_volume, end="", flush=True)
+    print(" Deviation:", distance_from_mean, end="", flush=True)
     if distance_from_mean > 75:
         print("    Unexpected sound", volume_range, end="", flush=True)
         image = "Unexpected sound"
