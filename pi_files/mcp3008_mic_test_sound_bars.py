@@ -35,8 +35,8 @@ def get_voltage_aplitude():
     mic_voltage_min = mcp.read_adc(0)
     mic_voltage_max = mic_voltage_min
 
-    samples_per_window = MCP3008_SAMPLING//SAMPLE_WINDOW
-    for x in range(0, samples_per_window):
+    # samples_per_window = SAMPLE_WINDOW
+    for x in range(0, SAMPLE_WINDOW):
         mic_voltage = mcp.read_adc(0)
         if (mic_voltage < 1024 and mic_voltage >= 0): # To filter out wrong vaules
             if mic_voltage > mic_voltage_max:
