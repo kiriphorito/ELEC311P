@@ -10,8 +10,8 @@ from picamera import PiCamera
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
-MCP3008_SAMPLING = 200 # at 5V
-SAMPLE_WINDOW = 50 # in mS
+MCP3008_SAMPLING = 200000 # at 5V
+SAMPLE_WINDOW = 500 # in mS
 
 # Software SPI configuration:
 CLK  = 18
