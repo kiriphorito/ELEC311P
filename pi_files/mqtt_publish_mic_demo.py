@@ -111,10 +111,10 @@ while True:
 
     image = ""
 
-    print("Mean:", str(round(mean_volume,2), end="", flush=True)
-    print(" Difference:", str(round(volume_range,2), end="", flush=True)
-    print(" Max Level:", str(round(max_volume,2), end="", flush=True)
-    print(" Deviation:", str(round(distance_from_mean,2), end="", flush=True)
+    print("Mean:", str(round(mean_volume,2)), end="", flush=True)
+    print(" Difference:", str(round(volume_range,2)), end="", flush=True)
+    print(" Max Level:", str(round(max_volume,2)), end="", flush=True)
+    print(" Deviation:", str(round(distance_from_mean,2)), end="", flush=True)
     if distance_from_mean > 75:
         print("    Unexpected sound", volume_range, end="", flush=True)
         image = "Unexpected sound"
