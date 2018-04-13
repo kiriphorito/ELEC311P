@@ -36,7 +36,7 @@ device1 = {
 
 
 def send_mqtt(mean_volume, reading_range, image):
-    device1['time'] =  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    device1['time'] =  datetime.datetime.now().strftime("%H:%M:%S")
     device1['mean_reading'] = mean_volume
     device1['reading_range'] = reading_range
     device1['image'] = image
