@@ -92,7 +92,7 @@ while True:
     mean_volume = min_volume
     # print_sound_bars(min_volume)
 
-    step_space = 50
+    step_space = 12
 
     for x in range(0, step_space):
         mic_volume = get_voltage_aplitude()
