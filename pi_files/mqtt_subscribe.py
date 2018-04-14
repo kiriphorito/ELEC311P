@@ -18,7 +18,11 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
     json_data = json.loads(message.payload)
-    print(str(json_data["time"]) + " " + str(json_data["mean_reading"]))
+    data = str(json_data["time"]) + " " + str(json_data["mean_reading"])
+    file = open("records.txt","a")
+    file.write(data+"\n")
+    file.close()
+    print(data)
 
 Connected = False   #global variable for the state of the connection
 
